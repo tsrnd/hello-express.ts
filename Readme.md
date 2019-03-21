@@ -12,3 +12,13 @@ npm install
 ```
 docker-compose up --build
 ```
+
+- Check TSLint
+```
+npm run tslint
+```
+
+- Fix error TSLint
+```
+npm run fix-tslint
+```
