@@ -17,7 +17,7 @@
         "no-var-keyword": true,
         "quotemark": [
             true,
-            "single",
+            "double",
             "avoid-escape"
         ],
         "semicolon": [
@@ -58,4 +58,4 @@
         "jsdoc-format": true,
         "eofline": true
     }
-} 
+}
