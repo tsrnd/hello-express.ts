@@ -3,7 +3,7 @@ FROM node:10.15.3-alpine
 RUN mkdir -p node/hello-node-ts
 
 ENV DIR node/hello-node-ts
-ENV APP_PORT 3001
+ENV APP_PORT 8081
 
 WORKDIR ${DIR}
 

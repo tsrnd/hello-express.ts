@@ -1,0 +1,15 @@
+html
+    head
+        title Demo
+        block links
+            
+    body
+        div(class="container")
+            block head
+            block content
+                div.newborder
+                    each user in users
+                        div(class="border-custom")
+                            p=user.username
+                                        
+            block foot
