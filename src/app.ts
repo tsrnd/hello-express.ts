@@ -6,7 +6,7 @@ import * as mongoose from 'mongoose';
 class App {
     public app: express.Application;
     public routePrv: Routes = new Routes();
-    public database: string = 'mongodb://localhost:27017/user';
+    public database: string = 'mongodb://db:27017/user';
     constructor() {
         this.app = express();
         this.config();
@@ -19,7 +19,7 @@ class App {
         this.app.use(bodyParser.urlencoded({
             extended: false
         }))
-    }
+    } 
 
     private mongoSetup(): void {
         (mongoose as any).Promise = global.Promise;
