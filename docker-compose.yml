@@ -20,9 +20,5 @@ services:
       - ./:/node/hello-node
     links:
       - mongodb:db
-    environment:
-      - DB_DRIVER = 'mongodb'
-      - DB_HOST = 'db'
-      - DB_NAME = 'team1'
-      - DB_PORT = '27017'
+    env_file: ./config/.env
 # run by "docker-compose up --build -d"

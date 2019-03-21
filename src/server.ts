@@ -1,5 +1,11 @@
 import app from "./app";
+import {db} from './utils/db';
 
-app.listen(3000, () => {
-    console.log("server is running listening on port 3000");
+const PORT = process.env.PORT;
+db.once('open', function () {
+    console.log('connect mongo db success.')
+  });
+
+app.listen(PORT, () => {
+    console.log("server is running listening on port" + PORT);
 })
