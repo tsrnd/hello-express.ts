@@ -1,0 +1,26 @@
+{
+  "name": "nodejs-tsc",
+  "version": "1.0.0",
+  "description": "Application nodeJS with typescript",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon --exec ts-node ./src/main.ts",
+    "start": "nodemon ./dist/main.js"
+  },
+  "author": "Duoc Nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.16.1",
+    "bcrypt": "^3.0.5",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.4.19",
+    "ts-node": "^8.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10",
+    "typescript": "^3.3.3333"
+  }
+}
