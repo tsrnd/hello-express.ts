@@ -1,8 +1,8 @@
-import * as mongoose from 'mongoose';
-import { User } from './../models/user';
-import { Request, Response } from 'express';
+import * as mongoose from "mongoose";
+import { User } from "./../models/user";
+import { Request, Response } from "express";
 
-const user = mongoose.model('User', User);
+const user = mongoose.model("User", User);
 
 export class UserController {
     public get(req: Request, resp: Response) {
@@ -18,7 +18,7 @@ export class UserController {
                     console.log(err);
                     resp.status(500).end();
                 }
-            })
+            });
         });
     }
 }
