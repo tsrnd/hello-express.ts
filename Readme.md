@@ -22,3 +22,13 @@ npm run tslint
 ```
 npm run fix-tslint
 ```
+
+- Run Test
+```
+npm run test
+```
+
+- Run Test Coverage
+```
+npm install testCoverage
+```
