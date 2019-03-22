@@ -3,8 +3,13 @@ import * as bodyParser from 'body-parser';
 import * as path from 'path';
 import * as morgan from 'morgan';
 import router from './routes/api';
+import DBConnection from './infrastructure/db';
 
 const app = express();
+
+// connect to db
+const db = new DBConnection();
+db.connect();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

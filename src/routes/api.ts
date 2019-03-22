@@ -1,5 +1,4 @@
 import * as express from 'express';
-import { json } from 'body-parser';
 import * as exampleController from '../http/controllers/example';
 
 const router = express.Router();
