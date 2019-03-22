@@ -1,16 +1,18 @@
 import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import * as path from 'path';
+import * as morgan from 'morgan';
+import router from './routes/api';
 
-class App {
-    public app: express.Application;
+const app = express();
 
-    constructor() {
-        this.app = express();
-        this.config();
-    }
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+    express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 })
+);
+app.use(morgan('combined'));
 
-    private config(): void {
-        // some config
-    }
-}
+app.use('/api', router);
 
-export default new App().app;
+export default app;
