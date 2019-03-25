@@ -1,8 +1,8 @@
 import * as mongoose from 'mongoose';
 
-const DB_HOST = process.env.DB_HOST || 'locahost';
+const DB_HOST = process.env.DB_HOST || 'localhost';
 const DB_NAME = process.env.DB_NAME || 'mydb';
-const DB_PORT = process.env.DB_PORT || '27107';
+const DB_PORT = process.env.DB_PORT || '27017';
 
 class DBConnection {
     connect() {
