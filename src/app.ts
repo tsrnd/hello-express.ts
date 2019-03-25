@@ -3,7 +3,7 @@ import * as bodyParser from 'body-parser';
 import * as path from 'path';
 import * as morgan from 'morgan';
 import router from './routes/api';
-import DBConnection from './infrastructure/db';
+import DBConnection from './util/db';
 
 const app = express();
 
