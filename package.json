@@ -2,9 +2,9 @@
   "name": "hello-node.ts",
   "version": "1.0.0",
   "description": "",
-  "main": "src/main.ts",
+  "main": "dist/server.js",
   "scripts": {
-    "build-development": "concurrently \"tsc -w\" \"nodemon -w './dist/**/*.js' dist/main.js\"",
+    "build-development": "concurrently \"tsc -w\" \"nodemon -w './dist/**/*.js' dist/server.js\"",
     "test": "echo \"comming soon\""
   },
   "repository": {
