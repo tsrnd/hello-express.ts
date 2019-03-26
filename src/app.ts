@@ -5,6 +5,7 @@ import * as morgan from 'morgan';
 import router from './routes/api';
 import DBConnection from './util/db';
 
+
 const app = express();
 
 // connect to db
