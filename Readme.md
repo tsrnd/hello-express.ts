@@ -21,3 +21,7 @@ npm run tslint
 - Fix error TSLint (fix some error TS convention)
 ```
 npm run tslint-fix
+
+- Unit test
+```
+npm run test
