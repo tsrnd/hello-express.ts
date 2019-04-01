@@ -108,3 +108,5 @@ dist/
 
 # ignore all ds_store
 **/.ds_store
+
+tmp/

@@ -1,0 +1,80 @@
+doctype html
+html
+  head
+    title Chat
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.5.0/css/all.css', integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU', crossorigin='anonymous')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    link(rel='stylesheet', type='text/css', href='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js')
+    link(rel="stylesheet", href="/static/style.css")
+  body
+    .container-fluid.h-100
+      .row.justify-content-center.h-100
+        .col-md-4.col-xl-3.chat
+          .card.mb-sm-3.mb-md-0.contacts_card
+            .card-header
+            .card-body.contacts_body
+              ui.contacts#ul-users
+            .card-footer
+        .col-md-8.col-xl-6.chat
+          .card
+            .card-header.msg_head
+              .d-flex.bd-highlight
+                //- .img_cont
+                //-   img.rounded-circle.user_img(src='/static/img/default.png')
+                //-   span.online_icon
+                .user_info
+                  span Room 1222
+                  p 1767 Messages
+                //- .video_cam
+                //-   span
+                //-     i.fas.fa-video
+                //-   span
+                //-     i.fas.fa-phone
+              span#action_menu_btn
+                i.fas.fa-ellipsis-v
+              .action_menu
+                ul
+                  li
+                    i.fas.fa-user-circle
+                    |  View profile
+                  li
+                    i.fas.fa-users
+                    |  Add to close friends
+                  li
+                    i.fas.fa-plus
+                    |  Add to group
+                  li
+                    i.fas.fa-ban
+                    |  Block
+            .card-body.msg_card_body
+              //- .d-flex.justify-content-end.mb-4
+              //-   .msg_cotainer_send
+              //-     | Ok, thank you have a good day
+              //-     span.msg_time_send 9:10 AM, Today
+              //-   .img_cont_msg
+              //-     img.rounded-circle.user_img_msg
+              //- .d-flex.justify-content-start.mb-4
+              //-   .img_cont_msg
+              //-     img.rounded-circle.user_img_msg(src='https://devilsworkshop.org/files/2013/01/enlarged-facebook-profile-picture.jpg')
+              //-   .msg_cotainer
+              //-     | Bye, see you
+              //-     span.msg_time 9:12 AM, Today
+            .card-footer
+              span.text-light.font-italic#btn-typing(style='margin-left: 20px')
+            .card-footer
+              .input-group
+                .input-group-append
+                  span.input-group-text.attach_btn
+                    label(for='file_input')
+                      i.fas.fa-paperclip
+                    input(type="file", style='display:none;', id='file_input')
+
+                textarea#message.form-control.type_msg(name='', placeholder='Type your message...')
+                .input-group-append
+                  span.input-group-text.send_btn
+                    i.fas.fa-location-arrow
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js")
+  script(src='/siofu/client.js')
+  script(src="/static/js/io.js")
