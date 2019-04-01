@@ -1,6 +1,7 @@
 import * as mongoose from "mongoose";
 import { User } from "./../models/user";
-import { Request, Response, response } from "express";
+import { Request, Response } from "express";
+import { Md5 } from 'md5-typescript';
 
 const user = mongoose.model("User", User);
 
@@ -17,10 +18,13 @@ export class UserController {
         });
     }
     public addUser(req: Request, resp:Response){
-        let newUser = new user(req.body);
+        let newUser = new user({
+            email: req.body.email,
+            password: Md5.init(req.body.password)
+        });
         newUser.save((err, user)=>{
             if(err){
-                resp.status(500).send(err);
+                resp.status(400).send(err);
             }    
             resp.json(user);
         })
