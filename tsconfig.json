@@ -1,6 +1,11 @@
 {
     "compilerOptions": {
-        "paths": { "*": ["types/*"] },
+        "paths": {
+            "*": ["types/*"],
+            "@controllers/*": ["http/controllers/*"],
+            "@models/*": ["models/*"],
+            "@util/*": ["util/*"],
+        },
         "module": "commonjs",
         "moduleResolution": "node",
         "pretty": true,
