@@ -1,0 +1,25 @@
+
+version: '3'
+services:
+  mongodb:
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/DB.Dockerfile
+    container_name: mongo
+    image: mongo
+    ports:
+      - '27017:27017'
+  node-app:
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/App.Dockerfile
+    container_name: node_app
+    image: nodeapp
+    ports:
+      - 8081:8081
+    volumes:
+      - ./:/node/hello-node-ts
+    links:
+      - mongodb:db
+    env_file: ./config/.env
+# run by "docker-compose up --build -d"
