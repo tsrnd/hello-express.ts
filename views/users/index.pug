@@ -1,0 +1,26 @@
+extends ../master.pug
+block content
+    h1=title
+    a(name="Add", href="/users/add")
+        i.fas.fa-plus-circle    
+    table
+        tr
+            th(width="200px", align="center") ID
+            th(width="200px", align="center") Email
+            th(width="200px", align="center") Option
+        - for(user of data)
+            tr
+                td(align="center")
+                    a(href=`/users/${user._id}`, title="title")=user._id
+                td(align="center")=user.email
+                td(align="center")
+                    a(href=`#`, data-id=user._id, onclick=`submitDelete(this)`)#link.far.fa-trash-alt
+                    |_ _ 
+                    a(href=`/users/${user._id}/edit`, name="Edit").fas.fa-pencil-alt
+    form(method="post", hidden="true")#formdelete
+    script.
+        var submitDelete = function(target){
+            var url = `/users/${target.getAttribute('data-id')}?_method=DELETE`
+            $('#formdelete').attr("action", url);
+            $('#formdelete').submit();
+        }

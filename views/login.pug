@@ -1,0 +1,11 @@
+extends master.pug
+block content
+    h1=title
+    form(action=`/login`, method="post")
+        label(for="Email") Email: 
+        input(type="text", name="email")
+        br
+        label(for="Password") Password: 
+        input(type="password", name="password")
+        br
+        button(value="submit") Login

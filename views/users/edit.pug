@@ -1,0 +1,11 @@
+extends ../master.pug
+block content
+    h1=title
+    form(action=`/users/${data._id}?_method=PUT`, method="post")
+        label(for="Email") Email: 
+        input(type="email", name="email" value=data.email)
+        br
+        label(for="Password") Password: 
+        input(type="password", name="password" value=data.password)
+        br
+        button(value="submit") Edit
