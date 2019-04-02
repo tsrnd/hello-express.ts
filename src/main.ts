@@ -9,12 +9,22 @@ const server = app.listen(PORT, () => {
 
 const io = socketIO(server);
 
-
-// const users = [];
-io.on("connection", function (socket) {
-    console.log("A user connected" + socket.id);
+let clients = 0;
+io.of("/chat").on("connection", function (socket) {
+    clients++;
+    console.log("A user connected " + socket.id);
 
     socket.on("disconnect", function () {
         console.log("A user disconnected");
+        clients--;
+        io.sockets.emit("broadcast", { description: clients + " clients connected!"});
     });
+
+    socket.emit("testEvent", "Hello World!");
+    socket.emit("broadcast", { description: clients + " clients connected!"});
+
+    socket.on("createRoom", function (data) {
+        socket.join(data);
+    });
+    console.log(socket.adapter.rooms);
 });
