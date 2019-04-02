@@ -10,7 +10,7 @@ block content
 
 block script
     script.
-        const socket = io('http://localhost:3001/all');
+        const socket = io('/all');
         socket.on('connect', function () {
             socket.on('message', function (msg) {
                 $('#chatbox').append(msg+'\n');

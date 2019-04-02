@@ -1,15 +1,19 @@
 import { Request, Response } from 'express';
 
 class Chats {
-    public index = function (req: Request, res: Response) {
+    public index = (req: Request, res: Response) => {
         res.render('chats/index');
     };
 
-    public chat = function (req: Request, res: Response) {
+    public chat = (req: Request, res: Response) => {
         res.render('chats/chat');
     };
 
-    public chatAll = function (endpoint: any, socket: any) {
+    public room = (req: Request, res: Response) => {
+        res.render('chats/room');
+    };
+
+    public chatAll = (endpoint: any, socket: any) => {
         console.log('Client connected room', socket.id);
         socket.on('message', (m: any) => {
             endpoint.emit('message', m)

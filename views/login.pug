@@ -1,11 +1,33 @@
 extends master.pug
 block content
     h1=title
-    form(action=`/login`, method="post")
+    form(method="post")
         label(for="Email") Email: 
-        input(type="text", name="email")
+        input#inputEmail(type="text", name="email")
         br
         label(for="Password") Password: 
-        input(type="password", name="password")
+        input#inputPassword(type="password", name="password")
         br
-        button(value="submit") Login
+        button#submitLogin(value="submit") Login
+
+block script
+    script.
+        $("#submitLogin").click(() => {
+            $.ajax({
+                url: "/login",
+                type: "post",
+                data: {
+                    email: $("#inputEmail").val(),
+                    password: $("#inputPassword").val()
+                },
+                success: function(data){
+                    if (data.token) {
+                        localStorage.setItem("token", data.token);
+                        window.location.href = "/users";
+                    }
+                },
+                error: function(error){
+                    console.log(error);
+                },
+            });
+        });

@@ -39,6 +39,27 @@ class Socket {
                 console.log('Client disconnected');
             });
         });
+
+        var roomIO = this.io.of('/room');
+        roomIO.on('connection', (socket: any) => {
+            console.log(socket.id);
+            console.log('Client connected room:', socket.id);
+
+            socket.on('connectToServer', (data: any) => {
+                var room = "room-" + data.room
+                socket.join(room);
+                roomIO.in(room).emit('connectedToServer', `Server: ${data.name} are in ${room}`);
+            });
+
+            socket.on('message', (data: any) => {
+                var room = "room-" + data.room
+                roomIO.in(room).emit('message', data.name + ": " + data.message);
+            });
+
+            socket.on('disconnect', () => {
+                console.log('Client disconnected');
+            });
+        });
     };
 };
 

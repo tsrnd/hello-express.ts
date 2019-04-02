@@ -1,0 +1,46 @@
+extends ../master.pug
+block content
+    h1=title
+    textarea#chatbox(cols="180", rows="30", readonly)
+    br
+    lable 
+        | name: 
+    input#name
+    select#room(name="room")
+        option(value="1") 1
+        option(value="2") 2
+        option(value="3") 3
+    button(onclick='connect()') Connect
+    br
+    label
+        | message: 
+    input#message
+    button(onclick='sendMsg()') Send
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js')
+
+block script
+    script.
+        const socket = io('/room');
+        socket.on('connect', function () {
+            socket.on('connectedToServer', function (msg) {
+                $('#name').prop('disabled', true);
+                $('#room').prop('disabled', true);
+                $('#chatbox').append(msg+'\n');
+            });
+            socket.on('message', function (msg) {
+                $('#chatbox').append(msg+'\n');
+            });
+        });
+        function connect(){
+            socket.emit('connectToServer',{name: $('#name').val(), room:$('#room').val()});
+        }
+        function sendMsg(){
+            let data = {
+                name: $('#name').val(),
+                message: $('#message').val(),
+                room: $('#room').val()
+            }
+            socket.emit('message', data);
+            $('#message').val('');
+            $('#message').focus();
+        }

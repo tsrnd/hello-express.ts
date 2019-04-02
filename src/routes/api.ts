@@ -18,6 +18,8 @@ class Routes {
     private routes(): void {
         this.router.route('/example').get(exampleController.index);
 
+        this.router.get('/login', this.usersController.getLogin);
+        this.router.post('/login', this.usersController.login);
         // Users
         this.router.get('/users/add', this.usersController.add);
         this.router.get('/users/:id/edit', this.usersController.edit)
@@ -29,6 +31,7 @@ class Routes {
 
         // Chats
         this.router.get('/chats', this.chatsController.index);
+        this.router.get('/chats/room', this.chatsController.room);
         this.router.get('/chatsWith', this.chatsController.chat);
     };
 
