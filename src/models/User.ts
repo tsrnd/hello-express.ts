@@ -12,4 +12,7 @@ export const User = new Schema({
         type: String,
         require: true,
     },
+    nickname: {
+        type: String,
+    }
 });

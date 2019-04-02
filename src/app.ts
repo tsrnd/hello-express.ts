@@ -20,7 +20,7 @@ class App {
         this.app.use(bodyParser.json());
         // support application/x-www-form-urlencoded post data
         this.app.use(bodyParser.urlencoded({ extended: false }));
-        this.app.use("/static", express.static("./../public"));
+        this.app.use("/static", express.static(__dirname + "/public"));
         this.app.set("views", __dirname + "/views");
         this.app.set("view engine", "pug");
     }
@@ -33,7 +33,6 @@ class App {
         // mongoose.connection;
         console.log("Connect MongoDB successful!");
     }
-
 }
 
 export default new App().app;
