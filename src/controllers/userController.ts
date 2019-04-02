@@ -18,7 +18,7 @@ export class UserController {
     }
 
     public getAllUser(req: Request, res: Response) {
-        User.find({ 'username': 'tam' }, (err, data) => {
+        User.find({}, (err, data) => {
             if (err) {
                 res.send(err);
             }
