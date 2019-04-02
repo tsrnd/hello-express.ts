@@ -1,0 +1,29 @@
+doctype html
+html
+    head
+        title Chat realtime NodeJS demo
+        //- link(rel='stylesheet', href='css/style.css', type='text/css')
+        link(href='/css/styles.css', rel='stylesheet')
+        //- script(src='/js/socket.io.js')
+        //- script(src='/js/jquery.min.js')
+        //- script(src='/js/chat.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js')
+    body
+        fieldset
+            legend Demo chat realtime NodeJS
+            input#username(type='text', name='username', placeholder='Nhập tên')
+            br
+            #content
+            input#message(placeholder='Nhập gì đó')
+            br
+            button#sendMessage SEND
+
+    script.
+        var socket = io('http://127.0.0.1:3000/chat');
+        socket.on('connect', function () {
+        socket.send('hi');
+
+        socket.on('message', function (msg) {
+        // my msg
+            });
+        });
