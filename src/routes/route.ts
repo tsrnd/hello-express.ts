@@ -9,6 +9,9 @@ export class Routes {
         app.get('/', function(req, res) {
             res.sendfile(path.resolve(__dirname + '/../views/index.html'));
          });
+         app.get( '/room', function( req, res ) {
+            res.render('room');
+          } );
         app.get("/users", this.userController.get);
         app.post("/users", this.userController.addUser);
         app.get("/user/:id", this.userController.detail);

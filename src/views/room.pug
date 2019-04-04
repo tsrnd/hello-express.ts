@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.2/css/all.css", integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", crossorigin="anonymous")
+        link(href="/style.css", rel="stylesheet")
+        title=title
+    body
+        block content
+    script(src="https://code.jquery.com/jquery-3.3.1.min.js")
+    block script
+block content
+    h1=title
+    textarea#chatbox(cols="180", rows="30", readonly)
+    br
+    lable 
+        | name: 
+    input#name
+    select#room(name="room")
+        option(value="1") 1
+        option(value="2") 2
+        option(value="3") 3
+    button(onclick='connect()') Connect
+    br
+    label
+        | message: 
+    input#message
+    button(onclick='sendMsg()') Send
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js')
+
+block script
+    script.
+        const socket = io('/room');
+        socket.on('connect', function () {
+            socket.on('connectedToServer', function (msg) {
+                $('#name').prop('disabled', true);
+                $('#room').prop('disabled', true);
+                $('#chatbox').append(msg+'\n');
+            });
+            socket.on('message', function (msg) {
+                $('#chatbox').append(msg+'\n');
+            });
+        });
+        function connect(){
+            socket.emit('connectToServer',{name: $('#name').val(), room:$('#room').val()});
+        }
+        function sendMsg(){
+            let data = {
+                name: $('#name').val(),
+                message: $('#message').val(),
+                room: $('#room').val()
+            }
+            socket.emit('message', data);
+            $('#message').val('');
+            $('#message').focus();
+        }
