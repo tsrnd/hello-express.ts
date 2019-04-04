@@ -5,6 +5,7 @@
             "@controllers/*": ["http/controllers/*"],
             "@models/*": ["models/*"],
             "@util/*": ["util/*"],
+            "@http/*": ["http/*"],
         },
         "module": "commonjs",
         "moduleResolution": "node",

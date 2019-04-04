@@ -1,7 +1,6 @@
 import usersModel from '@models/user';
-import { Request, Response } from 'express';
+import { Request, Response } from 'passport';
 import * as promise from 'bluebird';
-import * as jwt from 'jsonwebtoken';
 
 class Users {
     private model: any;
@@ -13,7 +12,7 @@ class Users {
     public index = async (req: Request, res: Response) => {
         try {
             var count = await this.model.collection.countDocuments();
-            var user = await this.model.find();
+            var user = await this.model.find({ _id: { $ne: req.user._id } });
             res.render('users/index', {
                 title: 'List Users',
                 data: user,
@@ -37,6 +36,9 @@ class Users {
     };
 
     public add = (req: Request, res: Response) => {
+        if (req.isAuthenticated()) {
+            res.redirect('/users');
+        }
         res.render('users/add', {
             title: 'Add user'
         });
@@ -87,34 +89,6 @@ class Users {
             res.render('error', { error: error, title: 'Error', status: 400 });
         }
     };
-
-    public getLogin = (req: Request, res: Response) => {
-        res.render('login', {
-            title: 'Login'
-        })
-    }
-
-    public login = async (req: Request, res: Response) => {
-        try {
-            var user = await this.model.findOne({
-                email: req.body.email,
-                password: req.body.password
-            });
-            if (!user) {
-                res.render('error', { error: new Error('user not exists'), title: 'Error', status: 400 });
-            }
-            // if (user.comparePassword(req.body.password)) {
-            console.log(user);
-            res.send({
-                token: jwt.sign({
-                    email: user.email,
-                    id: user.user_id
-                }, 'RESTFULAPIs')
-            })
-        } catch (err) {
-            res.render('error', { error: err, title: 'Error', status: 400 });
-        }
-    }
 };
 
 export default Users;

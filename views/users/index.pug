@@ -14,6 +14,8 @@ block content
                     a(href=`/users/${user._id}`, title="title")=user._id
                 td(align="center")=user.email
                 td(align="center")
+                    a(href=`/chats/${user._id}`, name="Chat").far.fa-comments
+                    |_ _ 
                     a(href=`#`, data-id=user._id, onclick=`submitDelete(this)`)#link.far.fa-trash-alt
                     |_ _ 
                     a(href=`/users/${user._id}/edit`, name="Edit").fas.fa-pencil-alt
@@ -26,4 +28,4 @@ block content
         }
 
 block script
-    script(src="/sendToken.js")
+    //- script(src="/sendToken.js")

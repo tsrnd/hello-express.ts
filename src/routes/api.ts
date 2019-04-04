@@ -1,25 +1,48 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
+import Auth from '@controllers/auth';
 import Users from '@controllers/user';
 import Chats from '@controllers/chat';
 import exampleController from '@controllers/example';
+import Authenticated from '@http/middleware/auth';
+import { Request, Response } from 'passport';
 
 class Routes {
-    public router: Router;
+    private router: Router;
+    private authController: Auth;
     private usersController: Users;
     private chatsController: Chats;
+    private passport: any;
 
-    constructor() {
+    constructor(passport: any) {
         this.router = Router();
+        this.passport = passport;
         this.usersController = new Users();
         this.chatsController = new Chats();
+        this.authController = new Auth();
         this.routes();
     }
 
     private routes(): void {
+        this.router.all('*', Authenticated)
         this.router.route('/example').get(exampleController.index);
+        this.router.route('/fb').get((req, res) => {
+            res.render('chats/facebook');
+        });
 
-        this.router.get('/login', this.usersController.getLogin);
-        this.router.post('/login', this.usersController.login);
+        // Auth
+        this.router.get('/login', this.authController.getLogin);
+        this.router.post('/login', this.passport.authenticate('login', {
+            successRedirect: '/users',
+            failureRedirect: '/login',
+            failureFlash: true
+        }));
+
+        this.router.post('/logout', function (req: Request, res: Response) {
+            res.locals.user = null;
+            req.logout();
+            res.redirect('/login');
+        });
+
         // Users
         this.router.get('/users/add', this.usersController.add);
         this.router.get('/users/:id/edit', this.usersController.edit)
@@ -31,8 +54,8 @@ class Routes {
 
         // Chats
         this.router.get('/chats', this.chatsController.index);
-        this.router.get('/chats/room', this.chatsController.room);
-        this.router.get('/chatsWith', this.chatsController.chat);
+        this.router.get('/chats/room/:id', this.chatsController.room);
+        this.router.get('/chats/:id', this.chatsController.chat);
     };
 
     public getRouter(): Router {
@@ -40,5 +63,5 @@ class Routes {
     }
 };
 
-export default new Routes();
+export default Routes;
 

@@ -9,6 +9,10 @@ html(lang="en")
         title=title
     body
         block content
+        br
+        br
+        form(action="/logout", method="post")
+            input(type="submit", value="Logout")
     script(src="https://code.jquery.com/jquery-3.3.1.min.js")
     block script
     

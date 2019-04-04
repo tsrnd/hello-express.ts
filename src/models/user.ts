@@ -1,8 +1,9 @@
 import * as mongoose from 'mongoose';
 
 export interface IUser extends mongoose.Document {
-    email: string;
-    password: string;
+    email: String;
+    password: String;
+    rooms: [String];
     created_at: Date;
     updated_at: Date;
     deleted_at?: Date;
@@ -15,8 +16,13 @@ const schema: any = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        select: false
     },
+    rooms: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Room'
+    }],
     created_at: {
         type: Date,
         default: Date.now
