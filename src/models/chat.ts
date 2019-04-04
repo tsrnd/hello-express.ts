@@ -1,28 +1,27 @@
 import * as mongoose from 'mongoose';
 
-export interface IUser extends mongoose.Document {
-    email: String;
-    password: String;
-    rooms: [String];
+export interface IChat extends mongoose.Document {
+    message: String,
+    from: mongoose.Schema.Types.ObjectId,
+    room: String,
+    members: [mongoose.Schema.Types.ObjectId],
     created_at: Date;
     updated_at: Date;
     deleted_at?: Date;
 }
 
 const schema: any = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true
+    message: {
+        type: String
     },
-    password: {
-        type: String,
-        required: true,
-        select: false
+    from: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
-    rooms: [{
+    room: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Room'
-    }],
+    },
     created_at: {
         type: Date,
         default: Date.now
@@ -34,4 +33,4 @@ const schema: any = new mongoose.Schema({
     deleted_at: Date
 });
 
-export default mongoose.model<IUser>('User', schema);
+export default mongoose.model<IChat>('Chat', schema);

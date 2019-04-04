@@ -1,28 +1,28 @@
 import * as mongoose from 'mongoose';
 
-export interface IUser extends mongoose.Document {
+export interface IRoom extends mongoose.Document {
     email: String;
     password: String;
     rooms: [String];
+    type: Number;
     created_at: Date;
     updated_at: Date;
     deleted_at?: Date;
 }
 
 const schema: any = new mongoose.Schema({
-    email: {
+    name: {
         type: String,
         required: true
     },
-    password: {
-        type: String,
-        required: true,
-        select: false
-    },
-    rooms: [{
+    members: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Room'
+        ref: 'User'
     }],
+    type: {
+        type: Number,
+        default: 1
+    },
     created_at: {
         type: Date,
         default: Date.now
@@ -34,4 +34,4 @@ const schema: any = new mongoose.Schema({
     deleted_at: Date
 });
 
-export default mongoose.model<IUser>('User', schema);
+export default mongoose.model<IRoom>('Room', schema);

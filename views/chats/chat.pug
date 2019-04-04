@@ -1,0 +1,29 @@
+extends ../master.pug
+block content
+    h1
+        |to #{toUser.email}
+    textarea#chatbox(cols="180", rows="30", readonly, style='width:100%')
+    br
+    input#message(style='width:95%;height:20px; margin-right:1%')
+    button(onclick='sendMsg()') Send
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js')
+
+block script
+    script.
+        var toUser = !{JSON.stringify(toUser)};  
+        const socket = io(`/chat`, {query: 'token=key'});
+        socket.on('connect', function () {
+            socket.on('message', function (msg) {
+                console.log(msg);
+                $('#chatbox').append(msg+'\n');
+            });
+        });
+        function sendMsg(){
+            toUser.message = $('#message').val();
+            if (!toUser.message) {
+                return
+            }
+            socket.emit('message', toUser);
+            $('#message').val('');
+            $('#message').focus();
+        }

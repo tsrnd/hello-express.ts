@@ -1,0 +1,24 @@
+extends ../master.pug
+block content
+    h1=title
+    textarea#chatbox(cols="180", rows="30", readonly)
+    br
+    input#name
+    input#message
+    button(onclick='sendMsg()') Send
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js')
+
+block script
+    script.
+        const socket = io('/all');
+        socket.on('connect', function () {
+            socket.on('message', function (msg) {
+                $('#chatbox').append(msg+'\n');
+            });
+        });
+        function sendMsg(){
+            let name = $('#name').val();
+            socket.emit('message', name +': '+$('#message').val());
+            $('#message').val('');
+            $('#message').focus();
+        }
